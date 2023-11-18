@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import GameBoard from './components/GameBoard';
 import ResetButton from './components/ResetButton';
-import gameStore from './stores/GameStore';
+import gameStore from './store/GameStore';
+import { useEffect } from 'react';
 
 const App = observer(() => {
   useEffect(() => {
