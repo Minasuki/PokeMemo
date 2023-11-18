@@ -20,7 +20,7 @@ const App = observer(() => {
   };
   return (
     <>
-        <div>
+         <div>
       <h1>Juego de Memoria</h1>
       <GameBoard deck={gameStore.deck} flipped={gameStore.flipped} solved={gameStore.solved} onCardClick={handleCardClick} />
       <ResetButton onReset={handleReset} />

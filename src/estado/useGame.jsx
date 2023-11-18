@@ -1,0 +1,53 @@
+import { useState, useEffect } from 'react';
+import useImageManager from './useImageManager';
+
+const useGame = () => {
+  const { getImage } = useImageManager();
+
+  const [deck, setDeck] = useState([]);
+  const [flipped, setFlipped] = useState([]);
+  const [solved, setSolved] = useState([]);
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    generateDeck();
+  }, []);
+
+  const generateDeck = () => {
+    const newDeck = [...getImageArray(), ...getImageArray()].sort(() => Math.random() - 0.5);
+    setDeck(newDeck);
+  };
+
+  const getImageArray = () => Array.from({ length: 8 }, (_, index) => getImage(index));
+
+  const handleFlip = (index1, index2) => {
+    if (deck[index1] === deck[index2]) {
+      setSolved([...solved, deck[index1]]);
+    }
+  };
+
+  const handleClick = (index) => {
+    if (flipped.length < 2) {
+      setFlipped([...flipped, index]);
+      if (flipped.length === 1) {
+        setDisabled(true);
+        setTimeout(() => {
+          handleFlip(flipped[0], index);
+          setFlipped([]);
+          setDisabled(false);
+        }, 1000);
+      }
+    }
+  };
+
+  const resetGame = () => {
+    generateDeck();
+    setFlipped([]);
+    setSolved([]);
+    setDisabled(false);
+  };
+
+  return { deck, flipped, solved, disabled, handleClick, resetGame };
+};
+
+export default useGame;

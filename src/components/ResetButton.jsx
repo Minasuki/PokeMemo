@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
+import useGame from '../estado/useGame';
 
-const ResetButton = ({ onReset }) => (
-  <Button variant="contained" color="primary" onClick={onReset} style={{ marginTop: 20 }}>
-    Reiniciar Juego
-  </Button>
-);
+const ResetButton = () => {
+  const { resetGame } = useGame();
+
+  return (
+    <Button variant="contained" color="primary" onClick={resetGame} style={{ marginTop: 20 }}>
+      Reiniciar Juego
+    </Button>
+  );
+};
 
 ResetButton.propTypes = {
     onReset: PropTypes.func.isRequired,
