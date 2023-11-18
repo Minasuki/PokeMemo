@@ -1,5 +1,4 @@
 import {
-  CardContent,
   CardMedia,
   Card as MaterialCard,
 } from "@mui/material";
@@ -32,16 +31,13 @@ const Card = ({ image, isFlipped, onClick }) => {
          height: '100%',
        }}
       />
-      <CardContent>
-        {/* Any additional content you want to display */}
-      </CardContent>
     </MaterialCard>
   );
 };
 
 Card.propTypes = {
-  image: PropTypes.func.isRequired,
-  isFlipped: PropTypes.func.isRequired,
+  image: PropTypes.string.isRequired,
+  isFlipped: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

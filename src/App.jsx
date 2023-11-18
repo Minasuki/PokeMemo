@@ -1,6 +1,6 @@
 import Header from './components/Header';
-import GameBoard from './components/GameBoard';
 import Scoreboard from './components/ScoreBoard';
+import GameBoard from './estado/GameBoard';
 
 
 function App() {
