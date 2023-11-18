@@ -1,35 +1,21 @@
-import PropTypes from 'prop-types';
-import { Container, Grid } from '@mui/material';
-import CardComponent from './CardComponent';
-import useGame from '../estado/useGame';
-
+// components/GameBoard.js
+import React, { useState, useEffect } from 'react';
+import Card from './Card';
 
 const GameBoard = () => {
-  const { deck, flipped, solved, handleClick } = useGame();
+  const [cards, setCards] = useState([]); // Implement logic to generate cards array
+
+  const handleCardClick = (cardId) => {
+    // Implement logic to handle card clicks
+  };
 
   return (
-    <Container>
-      <Grid container spacing={2}>
-        {deck.map((_, index) => (
-          <Grid item key={index} xs={3}>
-            <CardComponent
-              index={index}
-              flipped={flipped.includes(index)}
-              solved={solved.includes(deck[index])}
-              onClick={() => handleClick(index)}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <div className="game-board">
+      {cards.map((card) => (
+        <Card key={card.id} image={card.image} isFlipped={card.isFlipped} onClick={() => handleCardClick(card.id)} />
+      ))}
+    </div>
   );
 };
-
-GameBoard.propTypes = {
-    deck: PropTypes.array.isRequired,
-    flipped: PropTypes.array.isRequired,
-    solved: PropTypes.array.isRequired,
-    onCardClick: PropTypes.func.isRequired,
-}
 
 export default GameBoard;

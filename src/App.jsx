@@ -1,17 +1,16 @@
+import Header from './components/Header';
 import GameBoard from './components/GameBoard';
-import ResetButton from './components/ResetButton';
-import useGame from './estado/useGame';
+import Scoreboard from './components/ScoreBoard';
 
-const App = () => {
-  const { resetGame } = useGame();
 
+function App() {
   return (
-    <div>
-      <h1>Juego de Memoria</h1>
+    <div className="App">
+      <Header />
+      <Scoreboard />
       <GameBoard />
-      <ResetButton onReset={resetGame} />
     </div>
   );
-};
+}
 
 export default App;
