@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import GameBoard from './components/GameBoard';
+import ResetButton from './components/ResetButton';
+import gameStore from './stores/GameStore';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = observer(() => {
+  useEffect(() => {
+    gameStore.generateDeck();
+  }, []);
 
+  const handleCardClick = (index) => {
+    if (!gameStore.disabled && !gameStore.flipped.includes(index)) {
+      gameStore.handleClick(index);
+    }
+  };
+
+  const handleReset = () => {
+    gameStore.resetGame();
+  };
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+        <div>
+      <h1>Juego de Memoria</h1>
+      <GameBoard deck={gameStore.deck} flipped={gameStore.flipped} solved={gameStore.solved} onCardClick={handleCardClick} />
+      <ResetButton onReset={handleReset} />
+    </div>
     </>
   )
-}
+})
 
 export default App
