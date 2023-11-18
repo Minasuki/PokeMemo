@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+// src/hooks/useGame.js
+import { useState, useEffect, useCallback } from 'react';
 import useImageManager from './useImageManager';
 
 const useGame = () => {
@@ -9,16 +10,16 @@ const useGame = () => {
   const [solved, setSolved] = useState([]);
   const [disabled, setDisabled] = useState(false);
 
-  useEffect(() => {
-    generateDeck();
-  }, []);
-
-  const generateDeck = () => {
+  const generateDeck = useCallback(() => {
     const newDeck = [...getImageArray(), ...getImageArray()].sort(() => Math.random() - 0.5);
     setDeck(newDeck);
-  };
+  }, [getImageArray]);
 
-  const getImageArray = () => Array.from({ length: 8 }, (_, index) => getImage(index));
+  const getImageArray = useCallback(() => Array.from({ length: 8 }, (_, index) => getImage(index)), [getImage]);
+
+  useEffect(() => {
+    generateDeck();
+  }, [generateDeck]);
 
   const handleFlip = (index1, index2) => {
     if (deck[index1] === deck[index2]) {
@@ -40,12 +41,12 @@ const useGame = () => {
     }
   };
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     generateDeck();
     setFlipped([]);
     setSolved([]);
     setDisabled(false);
-  };
+  }, [generateDeck]);
 
   return { deck, flipped, solved, disabled, handleClick, resetGame };
 };
