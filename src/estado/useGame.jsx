@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import useImageManager from './useImageManager';
 
 const useGame = () => {
-  const { getImage } = useImageManager();
+  const { getImageArray } = useImageManager();
 
   const [deck, setDeck] = useState([]);
   const [flipped, setFlipped] = useState([]);
@@ -14,8 +14,6 @@ const useGame = () => {
     const newDeck = [...getImageArray(), ...getImageArray()].sort(() => Math.random() - 0.5);
     setDeck(newDeck);
   }, [getImageArray]);
-
-  const getImageArray = useCallback(() => Array.from({ length: 8 }, (_, index) => getImage(index)), [getImage]);
 
   useEffect(() => {
     generateDeck();

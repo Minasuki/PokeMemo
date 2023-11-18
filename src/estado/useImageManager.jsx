@@ -1,13 +1,11 @@
+import bulbasaur from './img/bulbasaur.svg'
+import charter from './img/charcter.svg'
+import eevee from './img/eevee.svg'
+
 const useImageManager = () => {
   const images = [
-    'image1.jpg',
-    'image2.jpg',
-    'image3.jpg',
-    'image4.jpg',
-    'image5.jpg',
-    'image6.jpg',
-    'image7.jpg',
-    'image8.jpg',
+   bulbasaur,
+   charter, eevee
   ];
 
   const getImage = (index) => images[index];
