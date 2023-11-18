@@ -1,5 +1,4 @@
-// src/components/CardComponent.js
-import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardContent, Typography } from '@mui/material';
 
 const CardComponent = ({ card, flipped, solved, onClick }) => (
@@ -17,5 +16,12 @@ const CardComponent = ({ card, flipped, solved, onClick }) => (
     </CardContent>
   </Card>
 );
+
+CardComponent.propTypes = {
+    card: PropTypes.string.isRequired,
+    flipped: PropTypes.bool.isRequired,
+    solved: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+}
 
 export default CardComponent;

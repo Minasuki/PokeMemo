@@ -1,7 +1,7 @@
-// src/components/GameBoard.js
-import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, Grid } from '@mui/material';
 import CardComponent from './CardComponent';
+
 
 const GameBoard = ({ deck, flipped, solved, onCardClick }) => (
   <Container>
@@ -19,5 +19,12 @@ const GameBoard = ({ deck, flipped, solved, onCardClick }) => (
     </Grid>
   </Container>
 );
+
+GameBoard.propTypes = {
+    deck: PropTypes.array.isRequired,
+    flipped: PropTypes.array.isRequired,
+    solved: PropTypes.array.isRequired,
+    onCardClick: PropTypes.func.isRequired,
+}
 
 export default GameBoard;

@@ -1,5 +1,4 @@
-// src/components/ResetButton.js
-import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 
 const ResetButton = ({ onReset }) => (
@@ -7,5 +6,9 @@ const ResetButton = ({ onReset }) => (
     Reiniciar Juego
   </Button>
 );
+
+ResetButton.propTypes = {
+    onReset: PropTypes.func.isRequired,
+}
 
 export default ResetButton;
