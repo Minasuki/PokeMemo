@@ -5,12 +5,10 @@ import {
 import PropTypes from "prop-types";
 
 
-const Card = ({ image, isFlipped, onClick }) => {
-
+const Card = ({ card, handleCardClick }) => {
   return (
     <MaterialCard
-      onClick={onClick}
-      className={`card ${isFlipped ? 'flipped' : ''}`}
+      onClick={() => handleCardClick(card.id)}
       style={{
         width: 150,
         height: 200,
@@ -22,23 +20,22 @@ const Card = ({ image, isFlipped, onClick }) => {
       }}
     >
       <CardMedia
-       component="img"
-       alt="Card"
-       height="140"
-       image={isFlipped ? image : 'back_of_card_image.jpg'}
-       style={{
-         width: '100%',
-         height: '100%',
-       }}
+        component="img"
+        alt="Card"
+        height="140"
+        image={card.flipped ? card.img : 'back_of_card_image.jpg'}
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
       />
     </MaterialCard>
   );
 };
 
 Card.propTypes = {
-  image: PropTypes.string.isRequired,
-  isFlipped: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  card: PropTypes.object.isRequired,
+  handleCardClick: PropTypes.func.isRequired,
 };
 
 export default Card;
