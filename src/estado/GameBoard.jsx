@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import imgs from "./images";
-import { Button } from "@mui/material";
+import { Button,Box } from "@mui/material";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -100,7 +100,7 @@ const GameBoard = () => {
 
       <div className='relative h-screen flex items-center'>
 
-        <div>
+        <Box sx={{display:'flex',flexWrap:'wrap',justifyContent:'space-around'}}>
           {tarjeta.map(card => (
             <Card
               card={card}
@@ -108,7 +108,7 @@ const GameBoard = () => {
               handleCardClick={handleCardClick}
             />
           ))}
-        </div>
+        </Box>
         <Button
           className='bg-black font-semibold text-white rounded-md px-5 py-1 hover:bg-yellow-500 hover:text-black transition-all mb-3'
           onClick={handleNewGame}
