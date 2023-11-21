@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "../components/Card";
-import bulbasaur from './img/bulbasaur.svg'
-import charcter from './img/charcter.svg'
-import eevee from './img/eevee.svg'
+import imgs from "./images";
+import { Button } from "@mui/material";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -13,84 +12,112 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const generateCards = () => {
-  // Lista de imágenes, asumiendo que tienes un conjunto de imágenes
-  const images = [bulbasaur, charcter,eevee];
-
-  // Duplica las imágenes
-  const duplicatedImages = [...images, ...images];
-
-  // Baraja aleatoriamente el array de imágenes duplicadas
-  const shuffledImages = shuffleArray(duplicatedImages);
-
-  // Crea un array de objetos de cartas con propiedades como id, image, isFlipped, etc.
-  const cards = shuffledImages.map((image, index) => ({
-    id: index,
-    image,
-    isFlipped: false,
-  }));
-
-  return cards;
-};
-
 const GameBoard = () => {
-  const [cards, setCards] = useState(generateCards());
+  const [tarjeta, serTarjeta] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
+  const [movimientos, setMovimientos] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
-  const handleCardClick = (cardId) => {
-    // Verifica si la carta ya está volteada o si hay dos cartas ya volteadas
-    if (flippedCards.length === 2 || flippedCards.includes(cardId)) {
-      return;
+  const createBoard = () => {
+    const duplicatecards = imgs.flatMap((img, i) => {
+      const duplicate = {
+        ...img,
+        id: img.id + imgs.length,
+      };
+      return [img, duplicate];
+    });
+
+    const newCards = shuffleArray(duplicatecards);
+    const cards = newCards.map(card => {
+      return {
+        ...card,
+        flipped: false,
+        matched: false,
+      };
+    });
+    serTarjeta(cards);
+  };
+
+  useEffect(() => {
+    createBoard();
+  }, []);
+
+  const handleCardClick = id => {
+    if (isDisabled) return;
+
+    const [currentCard] = tarjeta.filter(card => card.id === id);
+
+    if (!currentCard.flipped && !currentCard.matched) {
+      currentCard.flipped = true;
+
+      const newFlippedCards = [...flippedCards, currentCard];
+      setFlippedCards(newFlippedCards);
+
+      if (newFlippedCards.length === 2) {
+        setIsDisabled(true);
+        const [firstCard, secondCard] = newFlippedCards;
+
+        if (firstCard.img === secondCard.img) {
+          firstCard.matched = true;
+          secondCard.matched = true;
+          setIsDisabled(false);
+        } else {
+          setTimeout(() => {
+            firstCard.flipped = false;
+            secondCard.flipped = false;
+            serTarjeta(tarjeta);
+            setIsDisabled(false);
+          }, 1000);
+        }
+
+        setFlippedCards([]);
+        setMovimientos(movimientos + 1);
+      }
+
+      serTarjeta(tarjeta);
     }
 
-    // Voltea la carta haciendo una copia del array de cartas
-    const updatedCards = cards.map((card) =>
-      card.id === cardId ? { ...card, isFlipped: true } : card
-    );
-
-    setCards(updatedCards);
-
-    // Agrega la carta volteada al array de cartas volteadas
-    setFlippedCards([...flippedCards, cardId]);
-
-    // Si hay dos cartas volteadas, verifica si son iguales después de un tiempo
-    if (flippedCards.length === 1) {
-      setTimeout(checkForMatch, 1000);
+    if (tarjeta.every(card => card.matched)) {
+      setGameOver(true);
+      setIsDisabled(true);
     }
   };
 
-  const checkForMatch = () => {
-    const [card1, card2] = flippedCards;
-    const areMatching = cards[card1].image === cards[card2].image;
-
-    // Si las cartas son iguales, mantenlas volteadas
-    // Si no son iguales, voltea ambas cartas de nuevo
-    const updatedCards = cards.map((card) =>
-      card.id === card1 || card.id === card2 ? { ...card, isFlipped: areMatching } : card
-    );
-
-    setCards(updatedCards);
-    setFlippedCards([]);
+  const handleNewGame = () => {
+    serTarjeta([]);
+    createBoard();
+    setMovimientos(0);
+    setGameOver(false);
+    setIsDisabled(false);
   };
 
   return (
-    <div
-      className="game-board"
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-      }}
-    >
-      {cards.map((card) => (
-        <Card
-          key={card.id}
-          image={card.image}
-          isFlipped={card.isFlipped}
-          onClick={() => handleCardClick(card.id)}
-        />
-      ))}
-    </div>
+    <>
+      {gameOver && (
+        <div className='fixed inset-0 bg-black opacity-50 z-10'></div>
+      )}
+
+      <div className='relative h-screen flex items-center'>
+
+        <div>
+          {tarjeta.map(card => (
+            <Card
+              card={card}
+              key={card.id}
+              handleCardClick={handleCardClick}
+            />
+          ))}
+        </div>
+        <Button
+          className='bg-black font-semibold text-white rounded-md px-5 py-1 hover:bg-yellow-500 hover:text-black transition-all mb-3'
+          onClick={handleNewGame}
+        >
+          Nuevo Juego
+        </Button>
+      </div>
+
+    </>
   );
 };
 
