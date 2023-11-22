@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import imgs from "./images";
 import { Button, Box } from "@mui/material";
+import Contador from "../components/Contador";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -20,6 +21,8 @@ const GameBoard = () => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const createBoard = () => {
+
+    // Duplicar tarjetas
     const duplicatecards = imgs.flatMap((img, i) => {
       const duplicate = {
         ...img,
@@ -28,7 +31,10 @@ const GameBoard = () => {
       return [img, duplicate];
     });
 
+    // LLama a la funcion para varajear las tarjetas
     const newCards = shuffleArray(duplicatecards);
+
+    // guarda la tarjeta ya varajeada y los demas valores pordefaul
     const cards = newCards.map(card => {
       return {
         ...card,
@@ -43,11 +49,16 @@ const GameBoard = () => {
     createBoard();
   }, []);
 
+  // Inicia la funcionalidad del clic de las tarjetas.
   const handleCardClick = id => {
+
+    //Asi no se cliclea nada antes de hacer otra cosa
     if (isDisabled) return;
 
+    // Filtra las tarjetas con id para encontrar la tarjeta especifica
     const [currentCard] = tarjeta.filter(card => card.id === id);
 
+    //entra cuando esta en false
     if (!currentCard.flipped && !currentCard.matched) {
       currentCard.flipped = true;
 
@@ -94,6 +105,7 @@ const GameBoard = () => {
 
   return (
     <>
+      <Contador movimientos={movimientos} />
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
         {tarjeta.map(card => (
           <Card
