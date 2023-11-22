@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import imgs from "./images";
-import { Button,Box } from "@mui/material";
+import { Button, Box } from "@mui/material";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -13,7 +13,7 @@ const shuffleArray = (array) => {
 };
 
 const GameBoard = () => {
-  const [tarjeta, serTarjeta] = useState([]);
+  const [tarjeta, setTarjeta] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [movimientos, setMovimientos] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -36,7 +36,7 @@ const GameBoard = () => {
         matched: false,
       };
     });
-    serTarjeta(cards);
+    setTarjeta(cards);
   };
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const GameBoard = () => {
           setTimeout(() => {
             firstCard.flipped = false;
             secondCard.flipped = false;
-            serTarjeta(tarjeta);
+            setTarjeta(tarjeta);
             setIsDisabled(false);
           }, 1000);
         }
@@ -75,7 +75,7 @@ const GameBoard = () => {
         setMovimientos(movimientos + 1);
       }
 
-      serTarjeta(tarjeta);
+      setTarjeta(tarjeta);
     }
 
     if (tarjeta.every(card => card.matched)) {
@@ -85,7 +85,7 @@ const GameBoard = () => {
   };
 
   const handleNewGame = () => {
-    serTarjeta([]);
+    setTarjeta([]);
     createBoard();
     setMovimientos(0);
     setGameOver(false);
@@ -94,29 +94,20 @@ const GameBoard = () => {
 
   return (
     <>
-      {gameOver && (
-        <div className='fixed inset-0 bg-black opacity-50 z-10'></div>
-      )}
-
-      <div className='relative h-screen flex items-center'>
-
-        <Box sx={{display:'flex',flexWrap:'wrap',justifyContent:'space-around'}}>
-          {tarjeta.map(card => (
-            <Card
-              card={card}
-              key={card.id}
-              handleCardClick={handleCardClick}
-            />
-          ))}
-        </Box>
-        <Button
-          className='bg-black font-semibold text-white rounded-md px-5 py-1 hover:bg-yellow-500 hover:text-black transition-all mb-3'
-          onClick={handleNewGame}
-        >
-          Nuevo Juego
-        </Button>
-      </div>
-
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+        {tarjeta.map(card => (
+          <Card
+            card={card}
+            key={card.id}
+            handleCardClick={handleCardClick}
+          />
+        ))}
+      </Box>
+      <Button
+        onClick={handleNewGame}
+      >
+        Nuevo Juego
+      </Button>
     </>
   );
 };

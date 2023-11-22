@@ -8,7 +8,6 @@ import meowth from "./img/meowth.svg";
 import pidgey from "./img/pidgey.svg";
 import pikachu from "./img/pikachu.svg";
 import poke_rocket from "./img/poke_rocket.svg";
-import pokemon from "./img/pokemon.svg";
 import psyduck from "./img/psyduck.svg";
 import rattata from "./img/rattata.svg";
 
