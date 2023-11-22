@@ -3,6 +3,7 @@ import Card from "../components/Card";
 import imgs from "./images";
 import { Button, Box } from "@mui/material";
 import Contador from "../components/Contador";
+import GameOver from "../components/GameOver";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -103,8 +104,13 @@ const GameBoard = () => {
     setIsDisabled(false);
   };
 
+  const handleSnackbarClose = () => {
+    setGameOver(false);
+  };
+
   return (
     <>
+      <GameOver open={gameOver} handleClose={handleSnackbarClose} />
       <Contador movimientos={movimientos} />
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
         {tarjeta.map(card => (
