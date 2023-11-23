@@ -10,9 +10,9 @@ const Card = ({ card, handleCardClick }) => {
     <MaterialCard
       onClick={() => handleCardClick(card.id)}
       style={{
-        width: 150,
-        height: 200,
-        margin: 10,
+        width: 120,
+        height: 120,
+        margin: 9,
         cursor: 'pointer',
         perspective: 1000,
         transformStyle: 'preserve-3d',

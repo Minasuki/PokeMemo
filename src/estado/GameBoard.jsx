@@ -4,6 +4,7 @@ import imgs from "./images";
 import { Button, Box, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel } from "@mui/material";
 import Contador from "../components/Contador";
 import GameOver from "../components/GameOver";
+import { principal, opcion, tarjetas } from "./style";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -126,28 +127,38 @@ const GameBoard = () => {
   };
 
   return (
-    <>
-      <GameOver open={gameOver} handleClose={handleSnackbarClose} />
+    <Box sx={principal}>
 
-      <Box>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Nivel de Dificultad</FormLabel>
-          <RadioGroup
-            row
-            aria-label="level"
-            name="level"
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
-          >
-            <FormControlLabel value="facil" control={<Radio />} label="Fácil" />
-            <FormControlLabel value="intermedio" control={<Radio />} label="Intermedio" />
-            <FormControlLabel value="dificil" control={<Radio />} label="Dificil" />
-          </RadioGroup>
-        </FormControl>
+      <Box sx={opcion}>
+        <GameOver open={gameOver} handleClose={handleSnackbarClose} />
+
+        <Box>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Nivel de Dificultad</FormLabel>
+            <RadioGroup
+              row
+              aria-label="level"
+              name="level"
+              value={level}
+              onChange={(e) => setLevel(e.target.value)}
+            >
+              <FormControlLabel value="facil" control={<Radio />} label="Fácil" />
+              <FormControlLabel value="intermedio" control={<Radio />} label="Intermedio" />
+              <FormControlLabel value="dificil" control={<Radio />} label="Dificil" />
+            </RadioGroup>
+          </FormControl>
+        </Box>
+
+        <Button
+          onClick={handleNewGame}
+        >
+          Nuevo Juego
+        </Button>
+
+        <Contador movimientos={movimientos} />
       </Box>
 
-      <Contador movimientos={movimientos} />
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+      <Box sx={tarjetas}>
         {tarjeta.map(card => (
           <Card
             card={card}
@@ -156,12 +167,8 @@ const GameBoard = () => {
           />
         ))}
       </Box>
-      <Button
-        onClick={handleNewGame}
-      >
-        Nuevo Juego
-      </Button>
-    </>
+
+    </Box>
   );
 };
 
