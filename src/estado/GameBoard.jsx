@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import imgs from "./images";
-import { Button, Box } from "@mui/material";
+import { Button, Box, FormControl, FormLabel, RadioGroup, Radio,FormControlLabel } from "@mui/material";
 import Contador from "../components/Contador";
 import GameOver from "../components/GameOver";
 
@@ -20,11 +20,25 @@ const GameBoard = () => {
   const [movimientos, setMovimientos] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [level, setLevel] = useState("easy");
 
   const createBoard = () => {
 
+    let numTarjetas = 8
+
+    switch (level) {
+      case 'easy':
+        numTarjetas = 8
+        break;
+      case 'medium':
+        numTarjetas = 14
+        break;
+      default: numTarjetas = 8
+        break;
+    }
+
     // Duplicar tarjetas
-    const duplicatecards = imgs.flatMap((img, i) => {
+    const duplicatecards = imgs.slice(0, numTarjetas).flatMap((img) => {
       const duplicate = {
         ...img,
         id: img.id + imgs.length,
@@ -111,6 +125,24 @@ const GameBoard = () => {
   return (
     <>
       <GameOver open={gameOver} handleClose={handleSnackbarClose} />
+
+      <Box>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Nivel de Dificultad</FormLabel>
+          <RadioGroup
+            row
+            aria-label="level"
+            name="level"
+            value={level}
+            onChange={(e) => setLevel(e.target.value)}
+          >
+            <FormControlLabel value="easy" control={<Radio />} label="Fácil" />
+            <FormControlLabel value="medium" control={<Radio />} label="Intermedio" />
+            {/* Add more difficulty levels if needed */}
+          </RadioGroup>
+        </FormControl>
+      </Box>
+
       <Contador movimientos={movimientos} />
       <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
         {tarjeta.map(card => (
