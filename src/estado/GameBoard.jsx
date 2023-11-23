@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import imgs from "./images";
-import { Button, Box, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel } from "@mui/material";
+import { Button, Box, FormControl, RadioGroup, Radio, FormControlLabel, Typography } from "@mui/material";
 import Contador from "../components/Contador";
 import GameOver from "../components/GameOver";
-import { principal, opcion, tarjetas } from "./style";
+import { principal, opcion, tarjetas,dificultad_style } from "./style";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -132,9 +132,9 @@ const GameBoard = () => {
       <Box sx={opcion}>
         <GameOver open={gameOver} handleClose={handleSnackbarClose} />
 
-        <Box>
+        <Box sx={dificultad_style}>
           <FormControl component="fieldset">
-            <FormLabel component="legend">Nivel de Dificultad</FormLabel>
+            <Typography variant='h5'>Nivel de Dificultad</Typography>
             <RadioGroup
               row
               aria-label="level"
@@ -144,7 +144,7 @@ const GameBoard = () => {
             >
               <FormControlLabel value="facil" control={<Radio />} label="Fácil" />
               <FormControlLabel value="intermedio" control={<Radio />} label="Intermedio" />
-              <FormControlLabel value="dificil" control={<Radio />} label="Dificil" />
+              <FormControlLabel value="dificil" control={<Radio />} label="Difícil" />
             </RadioGroup>
           </FormControl>
         </Box>
