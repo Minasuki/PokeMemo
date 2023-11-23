@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import imgs from "./images";
-import { Button, Box, FormControl, FormLabel, RadioGroup, Radio,FormControlLabel } from "@mui/material";
+import { Button, Box, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel } from "@mui/material";
 import Contador from "../components/Contador";
 import GameOver from "../components/GameOver";
 
@@ -27,11 +27,14 @@ const GameBoard = () => {
     let numTarjetas = 8
 
     switch (level) {
-      case 'easy':
+      case 'facil':
         numTarjetas = 8
         break;
-      case 'medium':
+      case 'intermedio':
         numTarjetas = 14
+        break;
+      case 'dificil':
+        numTarjetas = 20
         break;
       default: numTarjetas = 8
         break;
@@ -136,9 +139,9 @@ const GameBoard = () => {
             value={level}
             onChange={(e) => setLevel(e.target.value)}
           >
-            <FormControlLabel value="easy" control={<Radio />} label="Fácil" />
-            <FormControlLabel value="medium" control={<Radio />} label="Intermedio" />
-            {/* Add more difficulty levels if needed */}
+            <FormControlLabel value="facil" control={<Radio />} label="Fácil" />
+            <FormControlLabel value="intermedio" control={<Radio />} label="Intermedio" />
+            <FormControlLabel value="dificil" control={<Radio />} label="Dificil" />
           </RadioGroup>
         </FormControl>
       </Box>

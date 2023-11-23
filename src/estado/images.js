@@ -10,6 +10,14 @@ import pikachu from "./img/pikachu.svg";
 import poke_rocket from "./img/poke_rocket.svg";
 import psyduck from "./img/psyduck.svg";
 import rattata from "./img/rattata.svg";
+import snorlax from "./img/snorlax.svg";
+import squirtle from "./img/squirtle.svg";
+import Threego from "./img/Threego.svg";
+import ultra_go from "./img/ultra_go.svg";
+import venonat from "./img/venonat.svg";
+import weedle from "./img/weedle.svg";
+import zapdos from "./img/zapdos.svg";
+import zubat from "./img/zubat.svg";
 
 const imgs = [
   {
@@ -71,6 +79,46 @@ const imgs = [
     id: 12,
     img: psyduck,
     alt: 'psyduck',
+  },
+  {
+    id: 13,
+    img: snorlax,
+    alt: 'snorlax',
+  },
+  {
+    id: 14,
+    img: squirtle,
+    alt: 'squirtle',
+  },
+  {
+    id: 15,
+    img: Threego,
+    alt: 'Threego',
+  },
+  {
+    id: 16,
+    img: ultra_go,
+    alt: 'ultra_go',
+  },
+  {
+    id: 17,
+    img: venonat,
+    alt: 'venonat',
+  },
+  {
+    id: 18,
+    img: weedle,
+    alt: 'weedle',
+  },
+  {
+    id: 19,
+    img: zapdos,
+    alt: 'zapdos',
+  },
+  {
+    id: 20,
+    img: zubat,
+    alt: 'zubat',
   },
 ]
 
