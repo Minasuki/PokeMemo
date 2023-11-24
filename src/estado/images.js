@@ -12,7 +12,7 @@ import psyduck from "./img/psyduck.svg";
 import rattata from "./img/rattata.svg";
 import snorlax from "./img/snorlax.svg";
 import squirtle from "./img/squirtle.svg";
-import Threego from "./img/Threego.svg";
+import dratini from "./img/dratini.svg";
 import ultra_go from "./img/ultra_go.svg";
 import venonat from "./img/venonat.svg";
 import weedle from "./img/weedle.svg";
@@ -92,8 +92,8 @@ const imgs = [
   },
   {
     id: 15,
-    img: Threego,
-    alt: 'Threego',
+    img: dratini,
+    alt: 'dratini',
   },
   {
     id: 16,

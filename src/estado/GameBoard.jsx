@@ -4,7 +4,7 @@ import imgs from "./images";
 import { Button, Box, FormControl, RadioGroup, Radio, FormControlLabel, Typography } from "@mui/material";
 import Contador from "../components/Contador";
 import GameOver from "../components/GameOver";
-import { principal, opcion, tarjetas,dificultad_style } from "./style";
+import { principal, opcion, tarjetas, dificultad_style } from "./style";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -21,7 +21,8 @@ const GameBoard = () => {
   const [movimientos, setMovimientos] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [level, setLevel] = useState("easy");
+  const [level, setLevel] = useState("facil");
+  const [levelChanged, setLevelChanged] = useState(false);
 
   const createBoard = () => {
 
@@ -39,7 +40,7 @@ const GameBoard = () => {
         break;
       default: numTarjetas = 8
         break;
-    }
+    } 
 
     // Duplicar tarjetas
     const duplicatecards = imgs.slice(0, numTarjetas).flatMap((img) => {
@@ -62,6 +63,7 @@ const GameBoard = () => {
       };
     });
     setTarjeta(cards);
+    setLevelChanged(false)
   };
 
   useEffect(() => {
@@ -120,6 +122,7 @@ const GameBoard = () => {
     setMovimientos(0);
     setGameOver(false);
     setIsDisabled(false);
+    setLevelChanged(false);
   };
 
   const handleSnackbarClose = () => {
@@ -149,7 +152,7 @@ const GameBoard = () => {
           </FormControl>
         </Box>
 
-        <Button
+        <Button variant='outlined'
           onClick={handleNewGame}
         >
           Nuevo Juego
