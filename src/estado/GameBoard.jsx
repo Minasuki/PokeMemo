@@ -4,7 +4,7 @@ import imgs from "./images";
 import { Button, Box, FormControl, RadioGroup, Radio, FormControlLabel, Typography } from "@mui/material";
 import Contador from "../components/Contador";
 import GameOver from "../components/GameOver";
-import { principal, opcion, tarjetas, dificultad_style } from "./style";
+import { botonNJ, principal, opcion, tarjetas, dificultad_style } from "./style";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -21,26 +21,28 @@ const GameBoard = () => {
   const [movimientos, setMovimientos] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [level, setLevel] = useState("facil");
+  const [nivel, setNivel] = useState("facil");
   const [levelChanged, setLevelChanged] = useState(false);
+  let primary = 'primary';
+  let success = 'success';
 
   const createBoard = () => {
 
     let numTarjetas = 8
 
-    switch (level) {
+    switch (nivel) {
       case 'facil':
         numTarjetas = 8
         break;
       case 'intermedio':
-        numTarjetas = 14
+        numTarjetas = 14;
         break;
       case 'dificil':
-        numTarjetas = 20
+        numTarjetas = 20;
         break;
       default: numTarjetas = 8
         break;
-    } 
+    }
 
     // Duplicar tarjetas
     const duplicatecards = imgs.slice(0, numTarjetas).flatMap((img) => {
@@ -63,7 +65,6 @@ const GameBoard = () => {
       };
     });
     setTarjeta(cards);
-    setLevelChanged(false)
   };
 
   useEffect(() => {
@@ -114,6 +115,7 @@ const GameBoard = () => {
       setGameOver(true);
       setIsDisabled(true);
     }
+
   };
 
   const handleNewGame = () => {
@@ -127,7 +129,23 @@ const GameBoard = () => {
 
   const handleSnackbarClose = () => {
     setGameOver(false);
+    setLevelChanged(false);
   };
+
+  const handleRadio = (e) => {
+    setNivel(e.target.value)
+    switch (nivel) {
+      case 'facil':
+        setLevelChanged(true)
+        break;
+      case 'intermedio':
+        setLevelChanged(true)
+        break;
+      case 'dificil':
+        setLevelChanged(true)
+        break;
+    }
+  }
 
   return (
     <Box sx={principal}>
@@ -142,8 +160,8 @@ const GameBoard = () => {
               row
               aria-label="level"
               name="level"
-              value={level}
-              onChange={(e) => setLevel(e.target.value)}
+              value={nivel}
+              onChange={handleRadio}
             >
               <FormControlLabel value="facil" control={<Radio />} label="Fácil" />
               <FormControlLabel value="intermedio" control={<Radio />} label="Intermedio" />
@@ -152,11 +170,14 @@ const GameBoard = () => {
           </FormControl>
         </Box>
 
-        <Button variant='outlined'
-          onClick={handleNewGame}
-        >
-          Nuevo Juego
-        </Button>
+        <Box sx={botonNJ}>
+          <Button variant='contained'
+            color={levelChanged ? success : primary}
+            onClick={handleNewGame}
+          >
+            {levelChanged ? 'Cambiar Dificultad' : 'Nuevo Juego'}
+          </Button>
+        </Box>
 
         <Contador movimientos={movimientos} />
       </Box>
