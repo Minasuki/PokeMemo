@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import imgs from "./images";
-import { Button, Box, FormControl, RadioGroup, Radio, FormControlLabel, Typography } from "@mui/material";
+import { Button, Box, FormControl, RadioGroup, Radio, FormControlLabel, Typography, AccordionSummary, Accordion, AccordionDetails } from "@mui/material";
 import Contador from "../components/Contador";
 import GameOver from "../components/GameOver";
-import { botonNJ, principal, opcion, tarjetas, dificultad_style } from "./style";
+import { botonNJ, principal, opcion, tarjetas, dificultad_style_1, dificultad_style_2, boardFControl } from "./style";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -153,7 +154,39 @@ const GameBoard = () => {
       <Box sx={opcion}>
         <GameOver open={gameOver} handleClose={handleSnackbarClose} />
 
-        <Box sx={dificultad_style}>
+        <Box sx={dificultad_style_2}>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+            >
+              <Typography variant='h5'>Nivel de Dificultad</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <FormControl component="fieldset" sx={boardFControl}>
+                <RadioGroup
+                  row
+                  aria-label="level"
+                  name="level"
+                  value={nivel}
+                  onChange={handleRadio}
+                >
+                  <FormControlLabel value="facil" control={<Radio />} label="Fácil" />
+                  <FormControlLabel value="intermedio" control={<Radio />} label="Intermedio" />
+                  <FormControlLabel value="dificil" control={<Radio />} label="Difícil" />
+                  <Button variant='contained'
+                    color={levelChanged ? success : primary}
+                    onClick={handleNewGame}
+                  >
+                    {levelChanged ? 'Cambiar Dificultad' : 'Nuevo Juego'}
+                  </Button>
+                </RadioGroup>
+              </FormControl>
+            </AccordionDetails>
+          </Accordion>
+        </Box>
+
+        <Box sx={dificultad_style_1}>
           <FormControl component="fieldset">
             <Typography variant='h5'>Nivel de Dificultad</Typography>
             <RadioGroup

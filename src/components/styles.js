@@ -9,4 +9,8 @@ export const contadorPaper = {
     flexDirection: 'column',
     alignItems: 'center',
     width: '20%',
+
+    "@media (max-width: 600px)": {
+        width: '35%'
+    },
 }
