@@ -4,7 +4,7 @@ import { variant6, contadorPaper } from "./styles";
 
 const Contador = ({ movimientos }) => {
   return (
-    <Paper elevation={3} style={contadorPaper}>
+    <Paper elevation={3} sx={contadorPaper}>
       <Typography variant="h6" gutterBottom sx={variant6}>
         Movimientos:
       </Typography>

@@ -3,8 +3,7 @@ export const variant6 = {
 }
 
 export const contadorPaper = {
-    padding: 10,
-    marginBottom: 20,
+    padding: 2,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
