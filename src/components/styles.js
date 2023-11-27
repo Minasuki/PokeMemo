@@ -13,3 +13,23 @@ export const contadorPaper = {
         width: '35%'
     },
 }
+
+export const CardMaterial ={
+    width: '120px',
+    height: '120px',
+    margin: 2,
+    cursor: 'pointer',
+    perspective: 1000,
+    transformStyle: 'preserve-3d',
+    transition: 'transform 0.5s',
+
+    "@media (max-width: 450px)": {
+     width: '100px',
+     height: '100px',
+     margin: 1,
+    },
+
+    "@media (min-width: 360px)": {
+        justifyContent: 'space-evenly',
+    },
+}

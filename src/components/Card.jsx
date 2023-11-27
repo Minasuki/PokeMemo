@@ -4,20 +4,13 @@ import {
   Card as MaterialCard,
 } from "@mui/material";
 import pokemon from "../estado/img/pokemon.svg";
+import { CardMaterial } from "./styles";
 
 const Card = ({ card, handleCardClick }) => {
   return (
     <MaterialCard
       onClick={() => handleCardClick(card.id)}
-      style={{
-        width: 120,
-        height: 120,
-        margin: 9,
-        cursor: 'pointer',
-        perspective: 1000,
-        transformStyle: 'preserve-3d',
-        transition: 'transform 0.5s',
-      }}
+      sx={CardMaterial}
     >
       <CardMedia
         component="img"
