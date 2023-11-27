@@ -1,6 +1,6 @@
-import bulbasaur from './img/bulbasaur.svg'
-import charter from './img/charcter.svg'
-import eevee from './img/eevee.svg'
+import bulbasaur from "./img/bulbasaur.svg";
+import charter from "./img/charcter.svg";
+import eevee from "./img/eevee.svg";
 import egg from "./img/egg.svg";
 import go from "./img/go.svg";
 import jigglypuff from "./img/jigglypuff.svg";
@@ -23,103 +23,103 @@ const imgs = [
   {
     id: 1,
     img: bulbasaur,
-    alt: 'bulbasaur',
+    alt: "bulbasaur",
   },
   {
     id: 2,
     img: charter,
-    alt: 'charter',
+    alt: "charter",
   },
   {
     id: 3,
     img: eevee,
-    alt: 'eevee',
+    alt: "eevee",
   },
   {
     id: 4,
     img: egg,
-    alt: 'egg',
+    alt: "egg",
   },
   {
     id: 5,
     img: go,
-    alt: 'go',
+    alt: "go",
   },
   {
     id: 6,
     img: jigglypuff,
-    alt: 'jigglypuff',
+    alt: "jigglypuff",
   },
   {
     id: 7,
     img: meowth,
-    alt: 'meowth',
+    alt: "meowth",
   },
   {
     id: 8,
     img: pidgey,
-    alt: 'pidgey',
+    alt: "pidgey",
   },
   {
     id: 9,
     img: pikachu,
-    alt: 'pikachu',
+    alt: "pikachu",
   },
   {
     id: 10,
     img: poke_rocket,
-    alt: 'poke_rocket',
+    alt: "poke_rocket",
   },
   {
     id: 11,
     img: rattata,
-    alt: 'rattata',
+    alt: "rattata",
   },
   {
     id: 12,
     img: psyduck,
-    alt: 'psyduck',
+    alt: "psyduck",
   },
   {
     id: 13,
     img: snorlax,
-    alt: 'snorlax',
+    alt: "snorlax",
   },
   {
     id: 14,
     img: squirtle,
-    alt: 'squirtle',
+    alt: "squirtle",
   },
   {
     id: 15,
     img: dratini,
-    alt: 'dratini',
+    alt: "dratini",
   },
   {
     id: 16,
     img: ultra_go,
-    alt: 'ultra_go',
+    alt: "ultra_go",
   },
   {
     id: 17,
     img: venonat,
-    alt: 'venonat',
+    alt: "venonat",
   },
   {
     id: 18,
     img: weedle,
-    alt: 'weedle',
+    alt: "weedle",
   },
   {
     id: 19,
     img: zapdos,
-    alt: 'zapdos',
+    alt: "zapdos",
   },
   {
     id: 20,
     img: zubat,
-    alt: 'zubat',
+    alt: "zubat",
   },
-]
+];
 
-export default imgs
+export default imgs;

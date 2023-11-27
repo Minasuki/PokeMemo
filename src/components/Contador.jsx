@@ -8,9 +8,7 @@ const Contador = ({ movimientos }) => {
       <Typography variant="h6" gutterBottom sx={variant6}>
         Movimientos:
       </Typography>
-      <Typography variant='h4'>
-        {movimientos}
-      </Typography>
+      <Typography variant="h4">{movimientos}</Typography>
     </Paper>
   );
 };

@@ -1,11 +1,30 @@
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import imgs from "./images";
-import { Button, Box, FormControl, RadioGroup, Radio, FormControlLabel, Typography, AccordionSummary, Accordion, AccordionDetails } from "@mui/material";
+import {
+  Button,
+  Box,
+  FormControl,
+  RadioGroup,
+  Radio,
+  FormControlLabel,
+  Typography,
+  AccordionSummary,
+  Accordion,
+  AccordionDetails,
+} from "@mui/material";
 import Contador from "../components/Contador";
 import GameOver from "../components/GameOver";
-import { botonNJ, principal, opcion, tarjetas, dificultad_style_1, dificultad_style_2, boardFControl } from "./style";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+  botonNJ,
+  principal,
+  opcion,
+  tarjetas,
+  dificultad_style_1,
+  dificultad_style_2,
+  boardFControl,
+} from "./style";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const shuffleArray = (array) => {
   // Algoritmo de Fisher-Yates para barajar el array
@@ -24,24 +43,24 @@ const GameBoard = () => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [nivel, setNivel] = useState("facil");
   const [levelChanged, setLevelChanged] = useState(false);
-  let primary = 'primary';
-  let success = 'success';
+  let primary = "primary";
+  let success = "success";
 
   const createBoard = () => {
-
-    let numTarjetas = 8
+    let numTarjetas = 8;
 
     switch (nivel) {
-      case 'facil':
-        numTarjetas = 8
+      case "facil":
+        numTarjetas = 8;
         break;
-      case 'intermedio':
+      case "intermedio":
         numTarjetas = 14;
         break;
-      case 'dificil':
+      case "dificil":
         numTarjetas = 20;
         break;
-      default: numTarjetas = 8
+      default:
+        numTarjetas = 8;
         break;
     }
 
@@ -58,7 +77,7 @@ const GameBoard = () => {
     const newCards = shuffleArray(duplicatecards);
 
     // guarda la tarjeta ya varajeada y los demas valores pordefaul
-    const cards = newCards.map(card => {
+    const cards = newCards.map((card) => {
       return {
         ...card,
         flipped: false,
@@ -73,13 +92,12 @@ const GameBoard = () => {
   }, []);
 
   // Inicia la funcionalidad del clic de las tarjetas.
-  const handleCardClick = id => {
-
+  const handleCardClick = (id) => {
     //Asi no se cliclea nada antes de hacer otra cosa
     if (isDisabled) return;
 
     // Filtra las tarjetas con id para encontrar la tarjeta especifica
-    const [currentCard] = tarjeta.filter(card => card.id === id);
+    const [currentCard] = tarjeta.filter((card) => card.id === id);
 
     //entra cuando esta en false
     if (!currentCard.flipped && !currentCard.matched) {
@@ -112,11 +130,10 @@ const GameBoard = () => {
       setTarjeta(tarjeta);
     }
 
-    if (tarjeta.every(card => card.matched)) {
+    if (tarjeta.every((card) => card.matched)) {
       setGameOver(true);
       setIsDisabled(true);
     }
-
   };
 
   const handleNewGame = () => {
@@ -128,31 +145,30 @@ const GameBoard = () => {
     setLevelChanged(false);
   };
 
-  const handleSnackbarClose = () => {
-    setGameOver(false);
-    setLevelChanged(false);
-  };
+  // const handleSnackbarClose = () => {
+  //   setGameOver(false);
+  //   setLevelChanged(false);
+  // };
 
   const handleRadio = (e) => {
-    setNivel(e.target.value)
+    setNivel(e.target.value);
     switch (nivel) {
-      case 'facil':
-        setLevelChanged(true)
+      case "facil":
+        setLevelChanged(true);
         break;
-      case 'intermedio':
-        setLevelChanged(true)
+      case "intermedio":
+        setLevelChanged(true);
         break;
-      case 'dificil':
-        setLevelChanged(true)
+      case "dificil":
+        setLevelChanged(true);
         break;
     }
-  }
+  };
 
   return (
     <Box sx={principal}>
-
       <Box sx={opcion}>
-        <GameOver open={gameOver} handleClose={handleSnackbarClose} />
+        <GameOver open={gameOver} handleClose={handleNewGame} />
 
         <Box sx={dificultad_style_2}>
           <Accordion>
@@ -160,7 +176,7 @@ const GameBoard = () => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
             >
-              <Typography variant='h5'>Nivel de Dificultad</Typography>
+              <Typography variant="h5">Nivel de Dificultad</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <FormControl component="fieldset" sx={boardFControl}>
@@ -171,14 +187,27 @@ const GameBoard = () => {
                   value={nivel}
                   onChange={handleRadio}
                 >
-                  <FormControlLabel value="facil" control={<Radio />} label="Fácil" />
-                  <FormControlLabel value="intermedio" control={<Radio />} label="Intermedio" />
-                  <FormControlLabel value="dificil" control={<Radio />} label="Difícil" />
-                  <Button variant='contained'
+                  <FormControlLabel
+                    value="facil"
+                    control={<Radio />}
+                    label="Fácil"
+                  />
+                  <FormControlLabel
+                    value="intermedio"
+                    control={<Radio />}
+                    label="Intermedio"
+                  />
+                  <FormControlLabel
+                    value="dificil"
+                    control={<Radio />}
+                    label="Difícil"
+                  />
+                  <Button
+                    variant="contained"
                     color={levelChanged ? success : primary}
                     onClick={handleNewGame}
                   >
-                    {levelChanged ? 'Cambiar Dificultad' : 'Nuevo Juego'}
+                    {levelChanged ? "Cambiar Dificultad" : "Nuevo Juego"}
                   </Button>
                 </RadioGroup>
               </FormControl>
@@ -188,7 +217,7 @@ const GameBoard = () => {
 
         <Box sx={dificultad_style_1}>
           <FormControl component="fieldset">
-            <Typography variant='h5'>Nivel de Dificultad</Typography>
+            <Typography variant="h5">Nivel de Dificultad</Typography>
             <RadioGroup
               row
               aria-label="level"
@@ -196,19 +225,32 @@ const GameBoard = () => {
               value={nivel}
               onChange={handleRadio}
             >
-              <FormControlLabel value="facil" control={<Radio />} label="Fácil" />
-              <FormControlLabel value="intermedio" control={<Radio />} label="Intermedio" />
-              <FormControlLabel value="dificil" control={<Radio />} label="Difícil" />
+              <FormControlLabel
+                value="facil"
+                control={<Radio />}
+                label="Fácil"
+              />
+              <FormControlLabel
+                value="intermedio"
+                control={<Radio />}
+                label="Intermedio"
+              />
+              <FormControlLabel
+                value="dificil"
+                control={<Radio />}
+                label="Difícil"
+              />
             </RadioGroup>
           </FormControl>
         </Box>
 
         <Box sx={botonNJ}>
-          <Button variant='contained'
+          <Button
+            variant="contained"
             color={levelChanged ? success : primary}
             onClick={handleNewGame}
           >
-            {levelChanged ? 'Cambiar Dificultad' : 'Nuevo Juego'}
+            {levelChanged ? "Cambiar Dificultad" : "Nuevo Juego"}
           </Button>
         </Box>
 
@@ -216,15 +258,10 @@ const GameBoard = () => {
       </Box>
 
       <Box sx={tarjetas}>
-        {tarjeta.map(card => (
-          <Card
-            card={card}
-            key={card.id}
-            handleCardClick={handleCardClick}
-          />
+        {tarjeta.map((card) => (
+          <Card card={card} key={card.id} handleCardClick={handleCardClick}/>
         ))}
       </Box>
-
     </Box>
   );
 };

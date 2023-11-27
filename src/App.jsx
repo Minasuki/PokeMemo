@@ -1,4 +1,4 @@
-import GameBoard from './estado/GameBoard';
+import GameBoard from "./estado/GameBoard";
 
 function App() {
   return (
