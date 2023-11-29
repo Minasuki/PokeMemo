@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import imgs from "./images";
 import {
@@ -259,7 +259,7 @@ const GameBoard = () => {
 
       <Box sx={tarjetas}>
         {tarjeta.map((card) => (
-          <Card card={card} key={card.id} handleCardClick={handleCardClick}/>
+          <Card card={card} key={card.id} handleCardClick={handleCardClick} />
         ))}
       </Box>
     </Box>
