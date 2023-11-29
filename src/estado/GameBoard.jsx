@@ -145,11 +145,6 @@ const GameBoard = () => {
     setLevelChanged(false);
   };
 
-  // const handleSnackbarClose = () => {
-  //   setGameOver(false);
-  //   setLevelChanged(false);
-  // };
-
   const handleRadio = (e) => {
     setNivel(e.target.value);
     switch (nivel) {
